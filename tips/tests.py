@@ -4,7 +4,7 @@ from django.core.urlresolvers import resolve
 from django.http import HttpRequest
 from django.test import TestCase
 
-from tips.views import index, home_page
+from tips.views import index
 # Create your tests here.
 
 
