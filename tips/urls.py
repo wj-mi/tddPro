@@ -4,5 +4,5 @@ import views
 
 app_name = 'tips'
 urlpatterns = [
-    url(r'^lists/$', views.ListsView.as_view(), name='index'),
+    url(r'^lists/$', views.ListsView.as_view(), name='lists'),
 ]

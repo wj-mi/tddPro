@@ -24,7 +24,7 @@ class NewVisitorTest(LiveServerTestCase):
     def test_can_start_a_list_retrieve_it_later(self):
         # bob 听说有一个在线待办事项应用
         # 他去看了这个应用的首页
-        self.browser.get(self.live_server_url+'/tips/index/')
+        self.browser.get(self.live_server_url+'/tips/lists/')
 
         # 他注意到网页的标题和头部包含'待办事项'这个词
         self.assertIn(u'待办事项', self.browser.title)
@@ -50,7 +50,7 @@ class NewVisitorTest(LiveServerTestCase):
         #
         self.check_for_row_in_list_table(u'1:购买《Python核心编程》')
         self.check_for_row_in_list_table(u'2:购买《测试驱动开发》')
-        self.fail('Finish the test!')
+        # self.fail('Finish the test!')
 
 
 if __name__ == "__main__":

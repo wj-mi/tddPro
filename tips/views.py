@@ -14,14 +14,14 @@ class ListsView(View):
         return render(request, 'index.html', {'items': items})
 
     def post(self, request):
-        item = Item.objects.create(text=request.POST['things'])
-        return redirect('/tips/index/')
+        item = Item.objects.create(text=request.POST['list'])
+        return redirect('/tips/lists/')
 
 
-def index(request):
-    if request.method == 'POST':
-        # new_item_text = request.POST.get('things', '')
-        item = Item.objects.create(text=request.POST['things'])
-        return redirect('/tips/index/')
-    items = Item.objects.all()
-    return render(request, 'index.html', {'items': items})
+# def index(request):
+#     if request.method == 'POST':
+#         # new_item_text = request.POST.get('things', '')
+#         item = Item.objects.create(text=request.POST['things'])
+#         return redirect('/tips/index/')
+#     items = Item.objects.all()
+#     return render(request, 'index.html', {'items': items})
