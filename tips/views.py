@@ -1,25 +1,27 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import View
+from models import Item
 # Create your views here.
 
 
 class IndexView(View):
 
     def get(self, request):
-        print 'in index'
-        return render(request, 'index.html')
+        items = Item.objects.all()
+        return render(request, 'index.html', {'items': items})
 
     def post(self, request):
-        data = request.POST.get('things', '')
-        return render(request, 'index.html')
+        item = Item.objects.create(text=request.POST['things'])
+        return redirect('/tips/index/')
 
 
 def index(request):
     if request.method == 'POST':
-        return render(request, 'index.html',
-                      {'new_item_text': request.POST['things']})
-    print 'in index'
-    return render(request, 'index.html')
+        # new_item_text = request.POST.get('things', '')
+        item = Item.objects.create(text=request.POST['things'])
+        return redirect('/tips/index/')
+    items = Item.objects.all()
+    return render(request, 'index.html', {'items': items})
