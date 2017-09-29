@@ -1,0 +1,8 @@
+*.log
+venv
+-rf *.pyc
+tips/migrations
+tips/*.pyc
+db.sqlite3
+__pycache__
+*.pyc
