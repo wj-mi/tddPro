@@ -7,9 +7,9 @@ REPO_URL = 'https://github.com/wj-mi/tddPro.git'
 
 
 def deploy():
-    # site_folder = '/home/%s/code/%s' % (env.user, env.host)
-    source_folder = '/home/{0}/source'.format(env.user)
-    _create_directory_structure_if_necessary(source_folder)
+    site_folder = '/home/%s/code' % (env.user)
+    source_folder = site_folder + '/source'
+    _create_directory_structure_if_necessary(site_folder)
     _get_latest_source(source_folder)
     _update_virtualenv(source_folder)
     _update_database(source_folder)

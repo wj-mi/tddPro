@@ -7,7 +7,7 @@ from models import Item
 # Create your views here.
 
 
-class IndexView(View):
+class ListsView(View):
 
     def get(self, request):
         items = Item.objects.all()

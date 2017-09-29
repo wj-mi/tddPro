@@ -3,9 +3,10 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import unittest
 from time import sleep
+from django.test import LiveServerTestCase
 
 
-class NewVisitorTest(unittest.TestCase):
+class NewVisitorTest(LiveServerTestCase):
 
     def setUp(self):
         self.browser = webdriver.Firefox()
@@ -20,11 +21,10 @@ class NewVisitorTest(unittest.TestCase):
         rows = table.find_elements_by_tag_name('tr')
         self.assertIn(row_text, [row.text for row in rows])
 
-
     def test_can_start_a_list_retrieve_it_later(self):
         # bob 听说有一个在线待办事项应用
         # 他去看了这个应用的首页
-        self.browser.get('http://localhost:8000/tips/index/')
+        self.browser.get(self.live_server_url+'/tips/index/')
 
         # 他注意到网页的标题和头部包含'待办事项'这个词
         self.assertIn(u'待办事项', self.browser.title)

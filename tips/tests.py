@@ -83,7 +83,6 @@ class IndexViewTest(TestCase):
         self.assertIn('item2', response.content.decode('utf-8'))
 
 
-
 class ItemModelTest(TestCase):
 
     def test_saving_and_retrieving_items(self):
