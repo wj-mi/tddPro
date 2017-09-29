@@ -1,5 +1,6 @@
 # -*- coding:utf-8 -*-
 from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
 import unittest
 
 
@@ -19,15 +20,33 @@ class NewVisitorTest(unittest.TestCase):
 
         # 他注意到网页的标题和头部包含'待办事项'这个词
         self.assertIn(u'待办事项', self.browser.title)
-        self.fail("Finish the test!")
+        header_text = self.browser.find_element_by_tag_name('h1').text
+        self.assertIn(u'待办事项', header_text)
 
         # 他应邀输入一个待办事项
+        inputbox = self.browser.find_element_by_id('new_item')
+        self.assertEqual(inputbox.get_attribute('placeholder'),
+                         u'请输入待办事项')
+        # 他在一个文本框中输入了"购买《Python核心编程》" 并点击提交按钮
+        # 页面中显示了"1.购买《Python核心编程》"
+        inputbox.send_keys(u'购买《Python核心编程》')
+        inputbox.send_keys(Keys.ENTER)
 
-        # 他在一个文本框中输入了"购买<Python核心编程>" 并点击提交按钮
-        # 页面中显示了"1.购买<Python核心编程>"
+        table = self.browser.find_element_by_id('list_table')
+        rows = table.find_elements_by_tag_name('tr')
+        self.assertIn(u'1:购买《Python核心编程》', [row.text for row in rows])
 
         # Bob在输入框中输入了'购买<测试驱动开发>'并点击提交按钮
         # 页面中显示了两个待办事项
+        inputbox = self.browser.find_element_by_id('new_item')
+        inputbox.send_keys(u'购买《测试驱动开发》')
+        inputbox.send_keys(Keys.ENTER)
+
+        table = self.browser.find_element_by_id('list_table')
+        rows = table.find_elements_by_tag_name('tr')
+        self.assertIn(u'1:购买《Python核心编程》', [row.text for row in rows])
+        self.assertIn(u'2:购买《测试驱动开发》', [row.text for row in rows])
+        self.fail('Finish the test!')
 
 
 if __name__ == "__main__":
